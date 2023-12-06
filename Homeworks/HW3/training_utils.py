@@ -139,12 +139,12 @@ def predict(
             pred = output.data.max(1, keepdim=True)[1]
             correct += pred.eq(target.data.view_as(pred)).sum()
 
-    test_loss /= len(torch.utils.data.Dataset(test_dataloader.dataset))
-    accuracy = 100.0 * correct / len(torch.utils.data.Dataset(test_dataloader.dataset))
+    test_loss /= len(test_dataloader.dataset)
+    accuracy = 100.0 * correct / len(test_dataloader.dataset)
 
     if verbose:
         print(
-            f"Test set: Avg. loss: {test_loss:.4f}, Accuracy: {correct}/{len(torch.utils.data.Dataset(test_dataloader.dataset))} ({accuracy:.0f}%)"
+            f"Test set: Avg. loss: {test_loss:.4f}, Accuracy: {correct}/{len(test_dataloader.dataset)} ({accuracy:.0f}%)"
         )
 
     return test_loss, accuracy
